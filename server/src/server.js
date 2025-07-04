@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // App API Routes
+import errorHandler from "./middlewares/error.js";
 import authRoutes from "./routes/authRoutes.js";
 app.use("/api/auth", authRoutes);
 
@@ -22,6 +23,14 @@ app.use("/api/auth", authRoutes);
 app.get("/", (_req, res) => {
   res.status(200).json({ message: "Welcome to the Roadmap API!" });
 });
+
+// 404 Not Found handler
+app.use((_req, res) => {
+  res.status(404).json({ message: "Resource not found" });
+});
+
+// Central error handling middleware
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
