@@ -17,6 +17,9 @@ app.use(express.json());
 // App API Routes
 import errorHandler from "./middlewares/error.js";
 import authRoutes from "./routes/authRoutes.js";
+import roadmapRoutes from "./routes/roadmapRoutes.js";
+
+app.use("/api/roadmap", roadmapRoutes);
 app.use("/api/auth", authRoutes);
 
 // Basic route for health checks
